@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <PackageId>MySql.Simple</PackageId>
+    <PackageVersion>5.3.5</PackageVersion>
+    <Authors>Neville Nazerane</Authors>
+    <Description>Written over MySql.Data, a simpiler way to use MySql in .NET Standard. Allows easy database connection and reading queried results while maintaining the disposable objects and providing access to all default MySql.Data objects.</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>
+      - Added string extensions to directly execute from connection string
+    </PackageReleaseNotes>
+    <PackageTags>MySql Database Simple Easy Quick</PackageTags>
+    <PackageIconUrl>http://mysqlsimple.azurewebsites.net/content/themes/icon.png</PackageIconUrl>
+    <PackageProjectUrl>http://mysqlsimple.azurewebsites.net</PackageProjectUrl>
+    <RootNamespace>MySql.Simple</RootNamespace>
+    <AssemblyName>MySql.Simple</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.9-dmr" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+
+
+<div class="well">
+    <h1>MySql Simple</h1>
+
+    <h3>A simple way to access a <b>MySQL database</b> using <b>.NET Standard</b></h3>
+
+    <div class="buttons row">
+            <a class="col-sm-4 btn btn-lg btn-default" target="_blank" href="https://www.nuget.org/packages/MySql.Simple">Go to Nuget page</a>
+            <a class="col-sm-4 btn btn-lg btn-default" href="@Url.Action("Index", "Docs")#installation">Installation Instructions</a>
+            <a class="col-sm-4 btn btn-lg btn-default" href="@Url.Action("Index", "Docs")#code-connection">Read Documentation</a>
+    </div>
+
+</div>
+
+
+<div id="code-sample">
+    @RenderPage("../Docs/_Sample.cshtml")
+</div>

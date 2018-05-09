@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewBag.Title - MySql Simple</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.lumen.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    @RenderSection("Styles", false)
+
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("Scripts", false)
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6080226555483390",
+            enable_page_level_ads: true
+        });
+    </script>
+
+</head>
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">MySql Simple</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "Docs")" >Documentation<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("Index", "Docs")#installation">Installation</a></li>
+                        <li><a href="@Url.Action("Index", "Docs")#code-connection">Connect to a database</a></li>
+                        <li >
+                            <a href="@Url.Action("Index", "Docs")#code-query">Quering</a>
+                            @*<ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Index", "Docs")#code-query">Run SQL</a></li>
+                                <li><a href="@Url.Action("Index", "Docs")#code-query">Fetch value</a></li>
+                                <li><a href="@Url.Action("Index", "Docs")#code-query">Fetch row</a></li>
+                                <li><a href="@Url.Action("Index", "Docs")#code-query">Fetch multiple rows</a></li>
+                            </ul>*@
+                        </li>
+                        <li><a href="@Url.Action("Index", "Docs")#code-functions">Code friendly Quering</a></li>
+                    </ul>
+                </li>
+                <li><a href="https://www.nuget.org/packages/MySql.Simple/ContactOwners">Contact</a></li>
+                <li><a href="https://fb.com/mysql.simple">Facebook</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        @RenderBody()
+    </div>
+
+</body>
+</html>

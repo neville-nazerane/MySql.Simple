@@ -1,0 +1,55 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nuget", "Nuget\Nuget.csproj", "{C74295ED-498D-4583-B68D-544DF52A0C27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Front", "Front\Front.csproj", "{E3D8C9B0-7CB6-4A33-BEB4-834A873ED1A8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{579F9693-36D0-42B8-9157-5525173DEBD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySql.Simple.Extension", "MySql.Simple.Extension\MySql.Simple.Extension.csproj", "{98F75E45-DE21-42D8-9DF9-8C309CDF7330}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget Content", "Nuget Content", "{D1647818-2ACA-4ABF-974B-A963B64F9578}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DD7DAA3A-5319-49B9-90A4-E65D03D9D62A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doumentation", "Doumentation", "{7EDA3AA2-CC98-4F2D-B543-637F3A161227}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C74295ED-498D-4583-B68D-544DF52A0C27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C74295ED-498D-4583-B68D-544DF52A0C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C74295ED-498D-4583-B68D-544DF52A0C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C74295ED-498D-4583-B68D-544DF52A0C27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3D8C9B0-7CB6-4A33-BEB4-834A873ED1A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3D8C9B0-7CB6-4A33-BEB4-834A873ED1A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3D8C9B0-7CB6-4A33-BEB4-834A873ED1A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3D8C9B0-7CB6-4A33-BEB4-834A873ED1A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{579F9693-36D0-42B8-9157-5525173DEBD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{579F9693-36D0-42B8-9157-5525173DEBD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{579F9693-36D0-42B8-9157-5525173DEBD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{579F9693-36D0-42B8-9157-5525173DEBD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98F75E45-DE21-42D8-9DF9-8C309CDF7330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98F75E45-DE21-42D8-9DF9-8C309CDF7330}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98F75E45-DE21-42D8-9DF9-8C309CDF7330}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98F75E45-DE21-42D8-9DF9-8C309CDF7330}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C74295ED-498D-4583-B68D-544DF52A0C27} = {D1647818-2ACA-4ABF-974B-A963B64F9578}
+		{E3D8C9B0-7CB6-4A33-BEB4-834A873ED1A8} = {7EDA3AA2-CC98-4F2D-B543-637F3A161227}
+		{579F9693-36D0-42B8-9157-5525173DEBD4} = {DD7DAA3A-5319-49B9-90A4-E65D03D9D62A}
+		{98F75E45-DE21-42D8-9DF9-8C309CDF7330} = {D1647818-2ACA-4ABF-974B-A963B64F9578}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B403FC3D-6D22-424B-A062-91E049801FDE}
+	EndGlobalSection
+EndGlobal

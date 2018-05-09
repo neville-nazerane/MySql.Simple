@@ -1,0 +1,128 @@
+
+<h2 class="doc-head">Code friendly quering</h2>
+
+<p>
+    The database object also has functions to execute code friendly sql. That is instead of adding entire 
+    large queries into one string without any syntax lighliting and later looking for the different parts 
+    of your sql, there are functions to run almost all kinds of queries to make the sql commmands more readable
+    in the code. All these functions can be followed by the four functions mentioned above: Query(), QuerySingle(),
+    QueryValue() and Query().
+</p>
+
+<h3>Select function</h3>
+
+<pre><code class="cs">
+
+    db.Select("id, fname", "lname")
+        .From("user u")
+        .Join("entries e", "u.id = e.userID")
+        .Where("username LIKE $0", query)
+        .Order("fname")
+        .Limit(20)
+        .Query();
+
+
+</code></pre>
+
+<p>
+
+    <ul>
+        <li>
+            <b>Select: </b>
+            Select is optional (default *), you can directly start with the second function From.
+            You can mention all fields under a string with commas or as multiple strings or both.
+        </li>
+        <li>
+            <b>From: </b>
+            From is the only mandatory. Can be used directly from db or continuing from select.
+            From can again take multple table names similar to the select function above
+        </li>
+        <li>
+            <b>Join: </b>
+            Multiple joins can be chained one after another.
+            All four join functions are available.
+        </li>
+    </ul>
+
+</p>
+
+
+<h3>Debug functionality</h3>
+
+<p>
+    For debugging porpose, a property 'FullQuery' is provided that can be used in place of the four functions. 
+    This property provides the exact query that would be executed when the chained functions run. 
+</p>
+
+<pre><code class="cs">
+
+    string sql =
+    db.Select("id, fname", "lname")
+        .From("user u")
+        .Join("entries e", "u.id = e.userID")
+        .Where("username LIKE $0", query)
+        .Order("fname")
+        .Limit(20)
+        .FullQuery;
+
+
+</code></pre>
+
+<p>
+    Or to reuse the query, the following code such as the following can be used: 
+</p>
+
+<pre><code class="cs">
+
+    var q = db.Select("id, fname", "lname")
+        .From("user u")
+        .Join("entries e", "u.id = e.userID")
+        .Where("username LIKE $0", query)
+        .Order("fname")
+        .Limit(20);
+
+    string sql = q.FullQuery;
+    using (var users = q.Query());
+
+</code></pre>
+
+
+<h3>Advanced Conditions</h3>
+
+<p>
+    If the where clause is complex with nested conditions, functionalities for convenient management are provided. 
+    These can be used in the where clause inside under the select and update functions.
+</p>
+
+<p>First You will need to create the conditions. Creating a condition can be done as follows.</p>
+
+<pre><code class="cs">
+    var cond = Conditioner.Build("name LIKE $0", name);  // the usual format with the object(s)
+    var cond2 = Conditioner.Build("fname = $0", fname);  // the usual format with the object(s)
+    var cond3 = Conditioner.Build("lname", lname);  // with no $ or @@, automatically converts to "lname = 'lame'" if lname were 'lame'
+    var cond4 = Conditioner.Build("fname = lname"); // without any object
+</code></pre>
+
+<p>To simplify the condition creations, you can take the help of the <b>Conditioner</b> class</p>
+
+<pre><code class="cs">
+    Conditioner c = new Conditioner(); // creates a helper object
+
+    // now the same above code can be written with the helper object c
+    var cond = c["name LIKE $0", name]; 
+    var cond2 = c["fname = $0", fname]; 
+    var cond3 = c["id", id];  
+    var cond4 = c["fname = lname"];
+</code></pre>
+
+<p>Now these conditions can be uses in complex conditional statments as follows</p>
+
+<pre><code class="cs">
+    .WhereConditional(cond.And(cond2.Or(cond3).And(Cond4)));
+</code></pre>
+
+<p>Or now you can use it as follows</p>
+
+<pre><code class="cs">
+    .WhereConditional(cond & (cond2 ! cond3 & Cond4));
+</code></pre>

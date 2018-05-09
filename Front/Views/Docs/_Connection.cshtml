@@ -1,0 +1,50 @@
+﻿
+<h2 class="doc-head">Connecting to a database</h2>
+
+<p>
+
+    In order to set up a new connection, you will need to create a new instance of <b>Mysql.Simple.Database</b>
+    by providing the connection string. Since the <b>Database</b> class allows an implicit operator for the connection
+    string, you can directly pass the connection string without a constructor to create a new Database connection.
+    The following is an example of a connection string and creating a new insance of a database.
+</p>
+
+<pre><code class="cs">
+    string ConnectionString = "Server=;Uid=;Database=;password=;SslMode=none";
+
+    Database db = ConnectionString;
+</code></pre>
+
+<p>
+    However for readability, if needed, there is always the option to use the constructor with the connection 
+    as a parameter as follows:
+</p>
+
+<pre><code class="cs">
+    Database db = new Database(ConnectionString);
+</code></pre>
+
+<p>
+    The database object contains an object of <b>MySql.Data</b>'s <b>MySqlConnection</b> that has been connected 
+    with the connection string. If required, this object can be accessed by the help of an implicit conversion or
+    by using the <b>Connection</b> property. The two lines below help fetch the same object in two different ways. 
+</p>
+
+<pre><code class="cs">
+    MySqlConnection conn1 = db;
+
+    var conn2 = db.Connection;
+</code></pre>
+
+<p>
+    The database object also implements <b>IDisposable</b>. On dispose, it closes the connection and disposes the
+    <b>MySqlConnection</b> object. Hence this object can be created with using to ensure that the connection is 
+    closed and the object is disposed.
+</p>
+
+<pre><code class="cs">
+        using (Database db = ConnectionString)
+        {
+            
+        }
+</code></pre>

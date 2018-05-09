@@ -1,0 +1,120 @@
+﻿
+<h2 class="doc-head">Quering</h2>
+
+<p>
+    There are four ways (four functions) queries can be excuted. These are similar to those of <b>Webmatrix.Data</b>.
+    All four of these function support a syntax that simplifies the usage of <b>String.Format</b> when calling the function.
+    So instead of using:
+    <code>(String.Format("INSERT INTO User (Username, FirstName) Values ('{0}', '{1}')", Username, Firstname))</code>
+    you could simply do:<code>("INSERT INTO User (Username, FirstName) Values ('@@0', '@@1')", Username, Firstname)</code>.
+    Note that @@0 and @@1 are @@ followed by the index of the params. So @@0 refers to the param at index 0 which is 'Username'.
+    
+</p>
+
+<p>The following are the four different ways to execute sqls.</p>
+
+<h3>Simply execute a query (no output)</h3>
+
+To directly execute a query you can simply call the <b>.Execute()</b> method in the <b>Database</b> object. 
+This would return an int that specifies the number of rows effected in the database.
+
+<pre><code class="cs">
+        int RowsEffected = db.Execute("INSERT INTO Users (Username, FirstName) Values ('@@0', '@@1')", Username, Firstname);
+</code></pre>
+
+ <h3>Run query to get a single value output</h3>
+
+<p>
+    To get just a single value as an output, use the <b>.QueryValue()</b> method of the <b>Database</b> object.
+    This function would return the first column of the first row of the result of the query.
+</p>
+
+<pre><code class="cs">
+
+    using (var result = db.QueryValue("SELECT COUNT(ID) FROM Users"){
+
+        // setting to an existing variable with the same datatype
+        User user = new User(){
+            ID = result;
+        };
+
+        // or directly returning assuming the return type is the same as the datatype
+        return result;
+    }
+
+</code></pre>
+
+
+ <h3>Run query to get an entire row</h3>
+
+
+<p>
+    To fetch a entire row, use the function <b>.QuerySingle()</b>. This function returns an object of the class <b>MySql.Simple.QueryResult</b>.
+    This object contains and uses an object of <b>MySql.Data.MySqlDataReader</b>. Since this object implements disposable, 
+    it can be used with using. The dispose function disposes the <b>MySqlDataReader</b> object. Once you fetch the 
+    <b>QueryResult</b> object, you can use this object to access columns of the row by the column name or index. 
+
+</p>
+
+<pre><code class="cs">
+    using (var result = db.QuerySingle("SELECT * FROM User WHERE ID = @@0", ID))
+    {
+        
+        if (result){ // check if a row was returned. avoid if you are sure the query returns atleast one row
+           User user = new User(){
+                ID = result["ID"],
+                UserName = result["username"],
+                FirstName = result["FirstName"],
+                LastName = result["LastName"],
+                DateOfBirth = result["DateOfBirth"]
+            };
+        }
+
+        
+    }    
+</code></pre>
+
+<p>
+    In the above code, note that once the value of the column is fetched, when it is being assigned to a variable, it returns 
+    in the same type as the variable it is being assigned to. For instance <code>user.ID</code> is an int. 
+    So <code>result["ID"]</code> returns an int. Since <code>UserName</code> is a string, <code>result["username"]</code> will also return string.
+    Since <code>DateOfBirth</code> is of type DateTime, <code>result["DateOfBirth"]</code> returns DateTime.
+    Note that all these assignments directly use implisit operators and the functions of <b>MySqlDataReader</b>, 
+    <b>.GetInt32()</b>, <b>.GetString()</b> and <b>.getDateTime()</b> respectively. In other words these operation have no performance issues
+    as compared to directly using these functions. These assignments are compatable with every primitive datatypes and with the types 
+    <b>MySqlDateTime</b>, <b>MySqlDecimal</b> and <b>MySqlGeometry</b>.
+</p>
+
+<p>
+     If you require to use the reader object within the result object, you can either use the implicit converter or
+    the property <b>reader</b>.The two lines below help fetch the same object in two different ways.
+</p>
+
+<pre><code class="cs">
+    MySqlDataReader reader1 = result;
+
+    var reader2 = result.reader;
+</code></pre>
+
+<h3>Using a query to fetch multiple rows</h3>
+
+<p>
+    Fetching multiple rows can be done with the <b>Query()</b> function. The process is very similar to using <b>QuerySingle</b>.
+    The main difference between the two is looping. In order to loop the result, the <b>result..Read()</b> function is called 
+    which gets each line and returns a boolean (false if empty). 
+</p>
+
+<pre><code class="cs">
+   using (var result = db.Query("SELECT username, FName, LName FROM tblUsers"))
+   {
+       while (result.Read())
+       {
+           users.Add(new TUser() {
+              UserName = result["username"],
+              FName = result["FName"],
+              LName = result["LName"],
+              DateOfBirth = result["DateOfBirth"]
+           });
+       }
+   } 
+</code></pre>

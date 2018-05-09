@@ -1,0 +1,37 @@
+﻿<h2 class="doc-head">Sample code</h2>
+
+
+<p>
+    The following shows the complete code for using this libary fetching a list of users from the 
+    database and adding them to a list. Note that the user object is not included in the libary.
+    <br />
+    For more information on the this code, read below for the full explaination. 
+</p>
+<pre><code class="cs">
+    var Users = new <span class="built_in">List</span>&lt;User&gt;();
+    using (Database db = ConnectionString){
+        using (var result = 
+                db.Select("ID, username, FirstName, LastName, DateOfBirth")
+                  .From("Users")
+                  .Where("IsActive = $0 AND username LIKE '@@1%' AND FirstName = $2", true, "test", "Test")
+                  .Order("LastName")
+                  .Limit(15)
+                  .Query()
+              )
+        {
+            if (!results){
+                // no results
+            }
+            while (result.Read())
+            {
+                users.Add(new User() {
+                    ID = result["ID"],
+                    UserName = result["username"],
+                    FirstName = result["FirstName"],
+                    LastName = result["LastName"],
+                    DateOfBirth = result["DateOfBirth"]
+                });
+            }
+        }
+    }
+        </code></pre>

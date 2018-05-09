@@ -1,0 +1,32 @@
+
+@{
+    ViewBag.Title = "Documentation";
+}
+
+@section Scripts
+{    
+    <script src="~/Scripts/Highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+}
+
+@section Styles
+{ 
+    <link href="~/Content/Highlight/default.css" rel="stylesheet" />
+}
+
+<div id="installation">
+    @RenderPage("_Installation.cshtml")
+</div>
+
+
+<div id="code-connection">
+    @RenderPage("_Connection.cshtml")
+</div>
+
+<div id="code-query">
+    @RenderPage("_Quering.cshtml")
+</div>
+
+<div id="code-functions">
+    @RenderPage("_Functions.cshtml")
+</div>
